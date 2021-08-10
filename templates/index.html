@@ -11,30 +11,54 @@
     <div style="color:blue">
         <form action="{{ url_for('predict')}}" method="post">
             <h2>Predictive analysis</h2>
+            <h3>School</h3><br><select name="MS" id="MS" required="required">
+                <option disabled selected value> -- select an option -- </option>
+                <option value=1>Mousinho da Silveira</option>
+                <option value=0>Gabriel Pereira</option>
+            </select>
             <h3>Age</h3>
-            <input id="age" name="age" type="number ">
-            <h3>Gender</h3><br><select name="sex_M" id="sex_M" required="required">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+            <input id="age" name="age" type="number" required = required>
+            <h3>Gender</h3><br>
+            <select name="sex_M" id="sex_M" required="required">
+                <option disabled selected value> -- select an option -- </option>
+                <option value=1>Male</option>
+                <option value=0>Female</option>
             </select>
 
             <h3>Address</h3><br><select name="address_U" id="address_U" required="required">
-                <option value="Urban">Urban</option>
-                <option value="Rural">Rural</option>
+                <option value=1>Urban</option>
+                <option value=0>Rural</option>
             </select>
 
             <h3>Family size</h3><br><select name="famsize_LE3" id="famsize_LE3" required="required">
-                <option value="LE3">Less than equal to 3</option>
-                <option value="Female">Diesel</option>
+                <option value=1>Less than equal to 3</option>
+                <option value=0>Greater than 3</option>
             </select>
-            <h3>Are you A Dealer or Individual</h3><br><select name="Seller_Type_Individual" id="resea" required="required">
-                <option value="Dealer">Dealer</option>
-                <option value="Individual">Individual</option>
+
+            <h3>Parent's Status</h3><br><select name="Pstatus_T" id="Pstatus_T" required="required">
+                <option value=1>Together</option>
+                <option value=0>Apart</option>
             </select>
-            <h3>Transmission type</h3><br><select name="Transmission_Mannual" id="research" required="required">
-                <option value="Mannual">Manual Car</option>
-                <option value="Automatic">Automatic Car</option>
+
+            <h3>Mother's Education</h3><br><select name="M_edu" id="M_edu" required="required">
+                <option value=0>None</option>
+                <option value=1>primary education (4th grade)</option>
+                <option value=2>5th to 9th grade</option>
+                <option value=3>secondary education</option>
+                <option value=3>higher education</option>
             </select>
+
+            <h3>Father's Education</h3><br><select name="F_edu" id="F_edu" required="required">
+                <option value=0>None</option>
+                <option value=1>primary education (4th grade)</option>
+                <option value=2>5th to 9th grade</option>
+                <option value=3>secondary education</option>
+                <option value=3>higher education</option>
+            </select>
+
+
+
+
             <br><br><button id="sub" type="submit ">Calculate the Selling Price</button>
             <br>
 
