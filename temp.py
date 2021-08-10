@@ -1,19 +1,28 @@
 from flask import Flask, render_template, request
 import jsonify
 import requests
-import pickle
+import joblib
 import numpy as np
+import pandas as pd
 import sklearn
 from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
-model_df1 = pickle.load(open('XGBoost_pred_df1.pkl', 'rb'))
-model_df2 = pickle.load(open('XGBoost_pred_df2.pkl', 'rb'))
-model_df3 = pickle.load(open('XGBoost_pred_df3.pkl', 'rb'))
+model1 = joblib.load(open('svclassifier.pkl', 'rb'))
+model2 = joblib.load(open('xgb_model_df1.pkl', 'rb'))
+df_port = pd.read_csv('student-por-sep.csv')
+df_mat = pd.read_csv('student-mat-sep.csv')
+df = pd.concat([df_mat,df_port],axis = 0)
+df.reset_index(drop=True, inplace=True)
+scaler = StandardScaler()
+var = ['age','Medu','Fedu','traveltime','studytime','failures','freetime','famrel','goout','Dalc','Walc','health',
+       'G1','G2','G3']
+df[var] = scaler.fit_transform(df[var])
+
 @app.route('/',methods=['GET'])
 def Home():
     return render_template('index.html')
 
-
+ 
 standard_to = StandardScaler()
 @app.route("/predict", methods=['POST'])
 def predict():
@@ -40,19 +49,19 @@ def predict():
             school_MS =0
             
         sex_M=request.form['sex_M']
-        if(sex_M=='Male'):
+        if(sex_M=='M'):
             sex_M=1
         else:
             sex_M=0	
             
         address_U=request.form['address_U']
-        if(address_U=='Urban'):
+        if(address_U=='U'):
             address_U=1
         else:
             address_U=0
             
         famsize_LE3 =request.form['famsize_LE3']
-        if(famsize_LE3=='Less than equal to 3'):
+        if(famsize_LE3=='LE3'):
             famsize_LE3=1
         else:
             famsize_LE3=0
