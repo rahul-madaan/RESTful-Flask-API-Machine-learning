@@ -103,15 +103,12 @@ def predict():
             reason_reputation = 1
 
         guardian = request.form['guardian']
+        guardian_mother = 0
+        guardian_other = 0
         if (guardian == 'mother'):
             guardian_mother = 1
-            guardian_other = 0
         elif (guardian == 'other'):
-            guardian_mother = 0
             guardian_other = 1
-        else:
-            guardian_mother = 0
-            guardian_other = 0
 
         schoolsup_yes = request.form['schoolsup_yes']
         if (schoolsup_yes == 'yes'):
@@ -126,10 +123,7 @@ def predict():
             famsup_yes = 0
 
         paid_yes = request.form['paid_yes']
-        if (paid_yes == 'yes'):
-            paid_yes = 1
-        else:
-            paid_yes = 0
+
 
         activities_yes = request.form['activities_yes']
         if (activities_yes == 'yes'):
