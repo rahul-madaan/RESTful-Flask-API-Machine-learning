@@ -110,50 +110,24 @@ def predict():
         elif (guardian == 'other'):
             guardian_other = 1
 
-        schoolsup_yes = request.form['schoolsup_yes']
-        if (schoolsup_yes == 'yes'):
-            schoolsup_yes = 1
-        else:
-            schoolsup_yes = 0
+        schoolsup_yes = int(request.form['schoolsup_yes'])
 
-        famsup_yes = request.form['famsup_yes']
-        if (famsup_yes == 'yes'):
-            famsup_yes = 1
-        else:
-            famsup_yes = 0
+        famsup_yes = int(request.form['famsup_yes'])
 
-        paid_yes = request.form['paid_yes']
+        paid_yes = int(request.form['paid_yes'])
 
 
-        activities_yes = request.form['activities_yes']
-        if (activities_yes == 'yes'):
-            activities_yes = 1
-        else:
-            activities_yes = 0
+        activities_yes = int(request.form['activities_yes'])
 
-        nursery_yes = request.form['nursery_yes']
-        if (nursery_yes == 'yes'):
-            nursery_yes = 1
-        else:
-            nursery_yes = 0
+        nursery_yes = int(request.form['nursery_yes'])
 
-        higher_yes = request.form['higher_yes']
-        if (higher_yes == 'yes'):
-            higher_yes = 1
-        else:
-            higher_yes = 0
+        higher_yes = int(request.form['higher_yes'])
 
-        internet_yes = request.form['internet_yes']
-        if (internet_yes == 'yes'):
-            internet_yes = 1
-        else:
-            internet_yes = 0
+        internet_yes = int(request.form['internet_yes'])
 
-        romantic_yes = request.form['romantic_yes']
-        if (romantic_yes == 'yes'):
-            romantic_yes = 1
-        else:
-            romantic_yes = 0
+        romantic_yes = int(request.form['romantic_yes'])
+
+
 
         if (G3 <= 8):
             prediction = model_df1.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
