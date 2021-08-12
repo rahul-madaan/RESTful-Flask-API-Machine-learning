@@ -48,11 +48,12 @@ def predict():
         G2 = int(request.form['G2'])
         G3 = int(request.form['G3'])
 
-        school_MS = request.form['school_MS']
-        sex_M = request.form['sex_M']
-        address_U = request.form['address_U']
-        famsize_LE3 = request.form['famsize_LE3']
-        Pstatus_T = request.form['Pstatus_T']
+        school_MS = int(request.form['school_MS'])
+        sex_M = int(request.form['sex_M'])
+        address_U = int(request.form['address_U'])
+        famsize_LE3 = int(request.form['famsize_LE3'])
+        Pstatus_T = int(request.form['Pstatus_T'])
+
         Mjob_health = 0
         Mjob_other = 0
         Mjob_services = 0
@@ -116,7 +117,6 @@ def predict():
 
         paid_yes = int(request.form['paid_yes'])
 
-
         activities_yes = int(request.form['activities_yes'])
 
         nursery_yes = int(request.form['nursery_yes'])
@@ -126,8 +126,6 @@ def predict():
         internet_yes = int(request.form['internet_yes'])
 
         romantic_yes = int(request.form['romantic_yes'])
-
-
 
         if (G3 <= 8):
             prediction = model_df1.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
