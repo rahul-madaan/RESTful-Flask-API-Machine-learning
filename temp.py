@@ -1,3 +1,5 @@
+## MEDU Giving Error
+
 from flask import Flask, render_template, request
 # import jsonify
 import requests
@@ -127,33 +129,44 @@ def predict():
 
         romantic_yes = int(request.form['romantic_yes'])
 
-        if (G3 <= 8):
-            prediction = model_df1.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
-                                             Dalc, Walc, health, G1, G2, G3, school_MS, sex_M, address_U, famsize_LE3,
+        X = scaler.transform(age, Medu, Fedu, traveltime, studytime, failures, freetime, famrel, goout, Dalc, Walc, health,
+                            G1, G2, G3)
+
+
+        prediction = model1.predict([[X,school_MS, sex_M, address_U, famsize_LE3,
                                              Pstatus_T, Mjob_health, Mjob_other, Mjob_services, Mjob_teacher,
                                              Fjob_health, Fjob_other, Fjob_services, Fjob_teacher, reason_home,
                                              reason_other, reason_reputation, guardian_mother, guardian_other,
                                              schoolsup_yes, famsup_yes, paid_yes, activities_yes, nursery_yes,
                                              higher_yes, internet_yes, romantic_yes]])
-            output = round(prediction[0])
-        elif (G3 > 8 and G3 <= 12.5):
-            prediction = model_df2.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
-                                             Dalc, Walc, health, G1, G2, G3, school_MS, sex_M, address_U, famsize_LE3,
-                                             Pstatus_T, Mjob_health, Mjob_other, Mjob_services, Mjob_teacher,
-                                             Fjob_health, Fjob_other, Fjob_services, Fjob_teacher, reason_home,
-                                             reason_other, reason_reputation, guardian_mother, guardian_other,
-                                             schoolsup_yes, famsup_yes, paid_yes, activities_yes, nursery_yes,
-                                             higher_yes, internet_yes, romantic_yes]])
+        if prediction == 0:
             output = round(prediction[0])
         else:
-            prediction = model_df3.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
-                                             Dalc, Walc, health, G1, G2, G3, school_MS, sex_M, address_U, famsize_LE3,
+            prediction = model2.predict([[X,school_MS, sex_M, address_U, famsize_LE3,
                                              Pstatus_T, Mjob_health, Mjob_other, Mjob_services, Mjob_teacher,
                                              Fjob_health, Fjob_other, Fjob_services, Fjob_teacher, reason_home,
                                              reason_other, reason_reputation, guardian_mother, guardian_other,
                                              schoolsup_yes, famsup_yes, paid_yes, activities_yes, nursery_yes,
                                              higher_yes, internet_yes, romantic_yes]])
             output = round(prediction[0])
+        # elif (G3 > 8 and G3 <= 12.5):
+        #     prediction = model_df2.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
+        #                                      Dalc, Walc, health, G1, G2, G3, school_MS, sex_M, address_U, famsize_LE3,
+        #                                      Pstatus_T, Mjob_health, Mjob_other, Mjob_services, Mjob_teacher,
+        #                                      Fjob_health, Fjob_other, Fjob_services, Fjob_teacher, reason_home,
+        #                                      reason_other, reason_reputation, guardian_mother, guardian_other,
+        #                                      schoolsup_yes, famsup_yes, paid_yes, activities_yes, nursery_yes,
+        #                                      higher_yes, internet_yes, romantic_yes]])
+        #     output = round(prediction[0])
+        # else:
+        #     prediction = model_df3.predict([[age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime, goout,
+        #                                      Dalc, Walc, health, G1, G2, G3, school_MS, sex_M, address_U, famsize_LE3,
+        #                                      Pstatus_T, Mjob_health, Mjob_other, Mjob_services, Mjob_teacher,
+        #                                      Fjob_health, Fjob_other, Fjob_services, Fjob_teacher, reason_home,
+        #                                      reason_other, reason_reputation, guardian_mother, guardian_other,
+        #                                      schoolsup_yes, famsup_yes, paid_yes, activities_yes, nursery_yes,
+        #                                      higher_yes, internet_yes, romantic_yes]])
+        #     output = round(prediction[0])
 
         if output < 0:
             return render_template('index.html', prediction_texts="Sorry")
